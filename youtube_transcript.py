@@ -9,7 +9,7 @@ def get_transcript(video_url):
         video_id = video_url.split("v=")[1].split("&")[0]
         
         # Get transcript
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['zh-CN'])
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['zh', 'zh-Hans'])
         
         # Format transcript to plain text
         formatter = TextFormatter()
@@ -24,8 +24,8 @@ def save_transcript(transcript):
     # Create 'transcripts' directory if it doesn't exist
     os.makedirs('transcripts', exist_ok=True)
     
-    # Generate filename with current date (yyyyMMdd.txt)
-    filename = datetime.now().strftime('%Y%m%d') + '.txt'
+    # Generate filename with current date and time (yyyyMMdd_HHMMSS.txt)
+    filename = datetime.now().strftime('%Y%m%d_%H%M%S') + '.txt'
     filepath = os.path.join('transcripts', filename)
     
     # Save transcript to file
